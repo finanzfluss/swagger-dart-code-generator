@@ -130,7 +130,8 @@ ${allEnums.map((e) => e.toString()).join('\n')}
     definedParameters.addAll(swaggerRoot.components?.parameters ?? {});
 
     definedParameters.forEach((key, swaggerRequestParameter) {
-      final enumValues = swaggerRequestParameter.schema?.enumValues ??
+      final enumValues = swaggerRequestParameter.schema?.items?.enumValues ??
+          swaggerRequestParameter.schema?.enumValues ??
           swaggerRequestParameter.items?.enumValues ??
           swaggerRequestParameter.enumValues;
 
@@ -194,7 +195,8 @@ ${allEnums.map((e) => e.toString()).join('\n')}
           if (swaggerRequestParameter.enumValues.isNotEmpty) {
             enumValues = swaggerRequestParameter.enumValues;
           } else {
-            enumValues = swaggerRequestParameter.schema?.enumValues ??
+            enumValues = swaggerRequestParameter.schema?.items?.enumValues ??
+                swaggerRequestParameter.schema?.enumValues ??
                 swaggerRequestParameter.items?.enumValues ??
                 [];
           }
